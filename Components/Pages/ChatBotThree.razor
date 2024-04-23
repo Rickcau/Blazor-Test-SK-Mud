@@ -1,0 +1,42 @@
+﻿@page "/chatbotthree"
+@rendermode InteractiveServer
+
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+<MudPaper Elevation="12" Height="90vh" style="margin-top:20px;margin-bottom:20px;margin-left:20px;margin-right:20px;gap:20px">
+    <MudGrid Spacing="2" >    
+            <MudItem xs="12">
+            <MudPaper Elevation="0" Height="75vh" Class="flex-grow-1" style="overflow-y: auto;">
+                    <MudStack AlignItems="AlignItems.Center">
+                        <MudText>No Messages</MudText>
+                    </MudStack>
+                </MudPaper>
+            </MudItem>
+            <MudItem xs="12">
+            <MudPaper Elevation="0" >
+              @*  <MudPaper Elevation="12" style="padding-top: 12px;padding-bottom: 36px;padding-left: 150px; padding-right: 24px; margin-left:20px;margin-left: 50px; margin-top:8px;">  *@
+                <MudStack Row="true">
+                        <MudSpacer />
+                        <MudTextField Class="sticky" Lines="3" @bind-Value="@_textValue" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send"  style="padding-bottom: 40px;padding-left: 10px; padding-right: 24px; margin-left:20px;margin-left: 50px; margin-top:8px;" />
+                        <MudSpacer />
+                </MudStack>
+         @*    </MudPaper> *@
+            </MudPaper>
+            </MudItem>
+    </MudGrid>
+</MudPaper>
+
+
+
+@code{
+    private string? _textValue;
+    string? sampleText;
+
+    protected override void OnInitialized()
+    {
+        sampleText = "THis is an example of some test in the input fields";
+    }
+
+}

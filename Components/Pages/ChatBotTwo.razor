@@ -1,0 +1,26 @@
+﻿@page "/chatbottwo"
+@rendermode InteractiveServer
+
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+
+    <MudContainer MaxWidth="MaxWidth.Small">
+        <MudStack>
+            <MudPaper Class="pa-4" >
+                <MudStack Spacing="4">
+                    <MudStack Row="true">
+                        <MudTextField T="string" Label="Input Language" />
+                        <MudTextField T="string" Label="Output Language" />
+                    </MudStack>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true">Select File</MudButton>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="true" DisableElevation="true">Upload</MudButton>
+                </MudStack>
+            </MudPaper>
+        </MudStack>
+    </MudContainer>
+
+@code {
+
+}
