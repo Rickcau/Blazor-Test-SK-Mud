@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -11,6 +11,16 @@
   
   <ItemGroup>
     <PackageReference Include="MudBlazor" Version="6.*" />
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <Content Update="Components\Pages\ChatBot.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
+    <Content Update="Components\Pages\UserQuestion.razor">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+    </Content>
   </ItemGroup>
   
 </Project>

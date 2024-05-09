@@ -19,7 +19,7 @@
               @*  <MudPaper Elevation="12" style="padding-top: 12px;padding-bottom: 36px;padding-left: 150px; padding-right: 24px; margin-left:20px;margin-left: 50px; margin-top:8px;">  *@
                 <MudStack Row="true">
                         <MudSpacer />
-                        <MudTextField Class="sticky" Lines="3" @bind-Value="@_textValue" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send"  style="padding-bottom: 40px;padding-left: 10px; padding-right: 24px; margin-left:20px;margin-left: 50px; margin-top:8px;" />
+                        <MudTextField  Lines="3" @bind-Value="@_textValue" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send"  style="padding-bottom: 40px;padding-left: 10px; padding-right: 24px; margin-left:20px;margin-left: 50px; margin-top:8px;" />
                         <MudSpacer />
                 </MudStack>
          @*    </MudPaper> *@
@@ -28,9 +28,8 @@
     </MudGrid>
 </MudPaper>
 
-
-
-@code{
+@code
+{
     private string? _textValue;
     string? sampleText;
 
@@ -38,5 +37,19 @@
     {
         sampleText = "THis is an example of some test in the input fields";
     }
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private void UploadFiles(IReadOnlyList<IBrowserFile> files)
+    {
+        foreach (var file in files)
+        {
+            this.files.Add(file);
+        }
+        //TODO upload the files to the server
+    }
 
+    private void UploadFiles2(IBrowserFile file)
+    {
+        files.Add(file);
+        //TODO upload the files to the server
+    }
 }

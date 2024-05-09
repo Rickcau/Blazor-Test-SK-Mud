@@ -1,0 +1,66 @@
+﻿@page "/FraudUI"
+@rendermode InteractiveServer
+
+<MudPopoverProvider />
+<MudDialogProvider />
+<MudSnackbarProvider />
+
+    <MudContainer MaxWidth="MaxWidth.Small">
+        <MudStack>
+            <MudPaper Class="pa-4">
+                <MudStack Row="true">
+                    <MudAvatar Image="assets/DocTranslate.png" Size="Size.Large" />
+                    <MudStack Justify="Justify.Center" Spacing="0">
+                        <MudText Typo="Typo.body1">Fraud Checker</MudText>
+                        <MudText Typo="Typo.body2">Upload Files for Analysis</MudText>
+                    </MudStack>
+                </MudStack>
+            </MudPaper>
+
+            <MudPaper Class="pa-4" >
+                <MudStack Spacing="4">
+                    <MudText Typo="Typo.body1">Select EPPIC, GIACT, SIEBEL, Hospitals</MudText>
+                <FilePicker @ref="childFilePicker" />
+                </MudStack>
+            </MudPaper>
+        <MudPaper Class="pa-4">
+            <MudStack Spacing="4">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!FilesUploaded())" DisableElevation="true">Start Processing</MudButton>
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@OnClick"  DisableElevation="true">Update State</MudButton>
+            </MudStack>
+        </MudPaper>  
+    </MudStack>
+    </MudContainer>
+<MudSpacer />
+<FraudAnalysisResponse />
+
+@code
+{
+    IList<IBrowserFile> files = new List<IBrowserFile>();
+    private const bool V = false;
+    private FilePicker? childFilePicker;
+    private bool _stateChangefilepicker = false;
+
+    // protected override void OnInitialized()
+    // {
+    //     state.OnChange += StateHasChanged;
+    // }
+
+
+    private bool FilesUploaded()
+    {
+        if (_stateChangefilepicker != childFilePicker.FilesUploaded)  // state has changed
+        {
+            _stateChangefilepicker = childFilePicker.FilesUploaded;
+            StateHasChanged();
+        }
+
+        return _stateChangefilepicker;
+    }
+
+    public void OnClick()
+    {
+        StateHasChanged();
+    }
+
+}

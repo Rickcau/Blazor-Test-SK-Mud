@@ -1,0 +1,12 @@
+﻿<MudItem xs="12" Style="bottom: 20px; width: calc(100% - 40px);background: #FFFFFF;">
+    <!-- Your second MudItem content goes here -->
+    <MudStack Row="true" Style="background: #FFFFFF;">
+        <MudSpacer />
+        <MudTextField Lines="3" Style="background: #FFFFFF;" @bind-Value="@_textValue" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" />
+        <MudSpacer />
+    </MudStack>
+</MudItem>
+
+@code {
+    private string _textValue;
+}

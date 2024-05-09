@@ -1,0 +1,18 @@
+﻿<MudContainer MaxWidth="MaxWidth.Small">
+    <MudGrid Justify="Justify.Center">
+        <MudDialog>
+            <DialogContent>
+                Please select more than 4 files!
+            </DialogContent>
+            <DialogActions>
+                <MudButton Color="Color.Primary" OnClick="Submit">Ok</MudButton>
+            </DialogActions>
+        </MudDialog>
+    </MudGrid>
+</MudContainer>
+@code {
+    [CascadingParameter] MudDialogInstance? MudDialog { get; set; }
+    
+    void Submit() => MudDialog?.Close(DialogResult.Ok(true));
+
+}

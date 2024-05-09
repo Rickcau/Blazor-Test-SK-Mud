@@ -5,22 +5,30 @@
 <MudDialogProvider />
 <MudSnackbarProvider />
 
-
-    <MudContainer MaxWidth="MaxWidth.Small">
-        <MudStack>
-            <MudPaper Class="pa-4" >
-                <MudStack Spacing="4">
-                    <MudStack Row="true">
-                        <MudTextField T="string" Label="Input Language" />
-                        <MudTextField T="string" Label="Output Language" />
-                    </MudStack>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" DisableElevation="true">Select File</MudButton>
-                    <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="true" DisableElevation="true">Upload</MudButton>
+<MudPaper Elevation="12" Class="pa-4" Style="position: relative; height: 90vh;">
+    <MudGrid Style="height: calc(100% - 40px);">
+        <MudItem xs="12" Style="padding-bottom: 20px;" >
+            <!-- Your first MudItem content goes here AlignItems="AlignItems.Center" -->
+            <MudPaper Elevation="0" Height="80vh" style="overflow-y: auto;"> 
+                <MudStack >
+                    <UserQuestion />
+                    <Tester />
                 </MudStack>
             </MudPaper>
-        </MudStack>
-    </MudContainer>
+        </MudItem>
+        <MudItem xs="12" Style="position: absolute; bottom: 20px; width: calc(100% - 40px);background: #FFFFFF;">
+            <!-- Your second MudItem content goes here -->
+            <MudStack Row="true" Style="background: #FFFFFF;">
+                <MudSpacer />
+                <MudTextField Lines="3" Style="background: #FFFFFF;" @bind-Value="@_textValue" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" />
+                <MudSpacer />
+            </MudStack>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+
 
 @code {
-
+    private string _textValue;
 }
