@@ -20,13 +20,13 @@
             <MudPaper Class="pa-4" >
                 <MudStack Spacing="4">
                     <MudText Typo="Typo.body1">Select EPPIC, GIACT, SIEBEL, Hospitals</MudText>
-                <FilePicker @ref="childFilePicker" />
+                    <FilePicker @ref="childFilePicker" OnFilesUploaded=HandleFileUploaded />
                 </MudStack>
             </MudPaper>
+        <MudProgressLinear Color="Color.Primary" @ref="progressBar" Hidden="@(progressHidden)" Indeterminate="true" Class="my-7" />
         <MudPaper Class="pa-4">
             <MudStack Spacing="4">
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" Disabled="@(!FilesUploaded())" DisableElevation="true">Start Processing</MudButton>
-                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@OnClick"  DisableElevation="true">Update State</MudButton>
+                <MudButton Variant="Variant.Filled" OnClick = "@OnClick_StartProcessing" Color="Color.Primary" Disabled="@(!_readytoprocess)" DisableElevation="true">Start Processing</MudButton>
             </MudStack>
         </MudPaper>  
     </MudStack>
@@ -38,13 +38,40 @@
 {
     IList<IBrowserFile> files = new List<IBrowserFile>();
     private const bool V = false;
+    private bool progressHidden = true;
+    private bool _readytoprocess = false;
     private FilePicker? childFilePicker;
+    private MudProgressLinear? progressBar;
     private bool _stateChangefilepicker = false;
 
     // protected override void OnInitialized()
     // {
     //     state.OnChange += StateHasChanged;
     // }
+
+    private void  HandleFileUploaded()
+    {
+        // Child FilePicker triggers this event
+        _readytoprocess = true;  // this will endable the start processing button
+       
+        // await DoSomethingElse();
+
+        // StateHasChanged() not needed when handling an event
+        // The Blazor engine will automatically
+        // run an Html diff after handling a component
+        // event.
+
+        // StateHasChanged();
+    }
+
+    private async Task OnClick_StartProcessing()
+    {
+        progressHidden = false;
+        _readytoprocess = false;
+        int milliseconds = 10000;       // 10 seconds
+        await Task.Delay(milliseconds); // Simulate checking the status of the job
+        progressHidden = true;
+    }
 
 
     private bool FilesUploaded()

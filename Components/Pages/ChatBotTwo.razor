@@ -9,18 +9,42 @@
     <MudGrid Style="height: calc(100% - 40px);">
         <MudItem xs="12" Style="padding-bottom: 20px;" >
             <!-- Your first MudItem content goes here AlignItems="AlignItems.Center" -->
-            <MudPaper Elevation="0" Height="80vh" style="overflow-y: auto;"> 
+            <MudPaper Elevation="0" Height="80vh" Style="overflow: auto;">
+             <div id="another_unique_identifier" class="ma-0" style="overflow: auto;">
                 <MudStack >
+                    <MudText>@_textValue</MudText>
                     <UserQuestion />
                     <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <UserQuestion />
+                    <div class="d-flex flex-column">
+                        <MudText>@_textValue</MudText>
+                    </div>
+                    <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <UserQuestion />
+                    <Tester />
+                    <MudText>@_textValue</MudText>
+                    <UserQuestion />
                 </MudStack>
+                </div>
             </MudPaper>
         </MudItem>
         <MudItem xs="12" Style="position: absolute; bottom: 20px; width: calc(100% - 40px);background: #FFFFFF;">
             <!-- Your second MudItem content goes here -->
             <MudStack Row="true" Style="background: #FFFFFF;">
                 <MudSpacer />
-                <MudTextField Lines="3" Style="background: #FFFFFF;" @bind-Value="@_textValue" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" />
+                <MudTextField @bind-Value="value" OnKeyDown="OnKeyDown" Label="Type a new question" Lines="3" TextUpdateSuppression="false" Style="background: #FFFFFF;" Variant="Variant.Outlined" OnAdornmentClick="AdornmentOnClick" Adornment ="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Send" />        
                 <MudSpacer />
             </MudStack>
         </MudItem>
@@ -30,5 +54,25 @@
 
 
 @code {
-    private string _textValue;
+    private string? _textValue = "Hello";
+    string? value;
+
+    async void AdornmentOnClick()
+    {
+        await Task.Delay(100);
+        _textValue = "AdornmentClicked";
+        StateHasChanged();
+    }
+
+    async void OnKeyDown(KeyboardEventArgs args)
+    {
+        if (args.Key == "Enter")
+        {
+            await Task.Delay(100);
+            // need to pass the value to the AI before setting it to ""
+            value = "";
+            StateHasChanged();
+        }
+    }
+
 }

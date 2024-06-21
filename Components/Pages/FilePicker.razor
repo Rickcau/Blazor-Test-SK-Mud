@@ -50,6 +50,8 @@
 
 @code {
     #nullable enable
+    private bool progressHidden = true;
+    private bool _readytoprocess = false;
     private const string DefaultDragClass = "relative rounded-lg border-2 border-dashed pa-4 mt-4 mud-width-full mud-height-full z-10";
     private string _dragClass = DefaultDragClass;
     private string? _eppicFileName = "";
@@ -60,7 +62,23 @@
     private readonly List<string> _fileNames = new();
     public bool FilesUploaded { get { return _filesUploaded; } }
 
+    [Parameter] public EventCallback OnFilesUploaded { get; set; }
 
+
+
+    private async Task NotifyParent()
+    {
+        await OnFilesUploaded.InvokeAsync();
+    }
+
+    private async Task OnClick_StartProcessing()
+    {
+        progressHidden = false;
+        _readytoprocess = false;
+        int milliseconds = 10000;       // 10 seconds
+        await Task.Delay(milliseconds); // Simulate checking the status of the job
+        progressHidden = true;
+    }
 
     private void OpenDialog()
     {
@@ -85,7 +103,7 @@
         }
     }
 
-    private void Upload()
+    async Task Upload()
     {
         // Upload the files here
         Snackbar.Configuration.PositionClass = Defaults.Classes.Position.TopCenter;
@@ -102,6 +120,7 @@
             _hospitalsFileName = _fileNames.Where(fileName => fileName.ToUpper().Contains("HOSPITAL")).ToList()[0];
             Snackbar.Add("Files have been uploaded!");
             _filesUploaded = true;
+            await NotifyParent();
             StateHasChanged(); 
         }
     }
